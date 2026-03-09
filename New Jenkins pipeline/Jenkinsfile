@@ -35,7 +35,12 @@ pipeline {
             }
             steps {
                 echo "Approval granted. Continuing pipeline..."
+                git url: 'https://github.com/HarrishC/jenkins_testing.git', branch: 'main'
+                dir('New Jenkins pipeline') {
+                    bat 'python helloWorld.py'
+                }
             }
         }
+
     }
 }
