@@ -36,7 +36,7 @@ pipeline {
                 echo "Approval granted. Continuing pipeline..."
                 git url: 'https://github.com/HarrishC/jenkins_testing.git', branch: 'main'
                 dir('New Jenkins pipeline') {
-                    sh 'python helloWorld.py'
+                    bat 'python helloWorld.py'
                 }
             }
         }
