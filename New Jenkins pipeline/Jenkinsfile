@@ -43,17 +43,5 @@ pipeline {
                 }
             }
         }
-
-    }
-    post {
-        always {
-            emailext(
-                to: 'harrishgamer13@gmail.com',
-                subject: "Build ${currentBuild.currentResult}",
-                body: "Build completed for build number ${env.BUILD_NUMBER}.",
-                attachLog: true,
-                attachmentsPattern: '**/*.log'
-            )
-        }
     }
 }
