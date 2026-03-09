@@ -33,10 +33,11 @@ pipeline {
                 id 'DeployInput'
             }
             steps {
+                def pythonExecutable = '"C:\\Users\\HARRISH C\\AppData\\Local\\Python\\bin\\python.exe"'
                 echo "Approval granted. Continuing pipeline..."
                 git url: 'https://github.com/HarrishC/jenkins_testing.git', branch: 'main'
                 dir('New Jenkins pipeline') {
-                    bat 'py helloWorld.py'
+                    bat "${pythonExecutable} helloWorld.py"
                 }
             }
         }
