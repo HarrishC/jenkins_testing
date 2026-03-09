@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name: 'Delay', defaultValue: false, description: 'Deploy to production environment?')
+        string(name: 'PrintingDifferentValue', defaultValue: 'test', description: 'Print the Default value')
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Build number : ${env.BUILD_NUMBER}"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    if (params.Delay == true) {
+                        echo 'Hello World!'
+                        // Add your deployment commands here
+                    } else {
+                        error('Delay is set to false. Failing the pipeline.')
+                    }
+                }
+            }
+        }
+        
+        stage('Approval') {
+            // Using Declarative Input Directive (Cleanest way)
+            input {
+                message 'Do you want to proceed with the manual deployment?'
+                ok 'Proceed'
+                id 'DeployInput'
+            }
+            steps {
+                echo "Approval granted. Continuing pipeline..."
+            }
+        }
+    }
+}
